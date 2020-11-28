@@ -44,9 +44,7 @@ public class SecurityCenter extends WebSecurityConfigurerAdapter{
 	// makes certain APIs public
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring()
-			.antMatchers("/wake-up**")
-			.antMatchers("/user/sign-up");
+		
 	}
 	
 	@Bean
