@@ -20,7 +20,7 @@ public class SecurityCenter extends WebSecurityConfigurerAdapter{
 	@Value("${SECURITY-USER-PASSWORD}")
 	private String basicSecurityPassword;
 	
-	// Currently I'm using basic auth as it's the easiest to implement.
+	// Currently I'm using basic auth as it's the easiest one to implement.
 	// will update in future to more reliable methods which can be used among microservices
 	// like 'validation using keys'
 	// please note OAuth is not valid here as token will expire after some time and this being
@@ -45,7 +45,9 @@ public class SecurityCenter extends WebSecurityConfigurerAdapter{
 	// makes certain APIs public
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		
+		web
+			.ignoring()
+			.antMatchers("/wake-up**");
 	}
 	
 	@Bean
