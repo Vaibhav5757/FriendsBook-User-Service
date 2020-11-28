@@ -38,7 +38,7 @@ public class SecurityCenter extends WebSecurityConfigurerAdapter{
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
 			.withUser(basicSecurityUser)
-			.password(this.passwordEncoder().encode(basicSecurityPassword))
+			.password(this.passwordEncoder().encode(basicSecurityPassword))// encode the password
 			.roles("SECURITY_HEAD");
 	}
 	
