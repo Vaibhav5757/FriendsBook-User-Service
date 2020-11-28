@@ -3,3 +3,7 @@ spring:
     user:
       name: ${SECURITY-USER-NAME}
       password: ${SECURITY-USER-PASSWORD}
+  datasource:    url: ${DATABASE-URL}
+    username: ${DATABASE-USERNAME}
+    password: ${DATABASE-USER-PASSWORD}
+    driver-class-name: ${DRIVER-CLASS-NAME}
