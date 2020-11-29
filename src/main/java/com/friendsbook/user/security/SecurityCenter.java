@@ -27,11 +27,13 @@ public class SecurityCenter extends WebSecurityConfigurerAdapter{
 	// an internal microservice(and not external) we cannot generate token again and again
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-			.anyRequest()
-			.authenticated()
+		http.csrf()
+			.disable()
+			.httpBasic()
 			.and()
-			.httpBasic();
+			.authorizeRequests()
+			.anyRequest()
+			.authenticated();
 	}
 	
 	@Override
