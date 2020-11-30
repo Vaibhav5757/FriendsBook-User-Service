@@ -1,4 +1,4 @@
 spring:
   application:
     name: User-Microservice
-  cloud:    config:      uri:      - https://friendsbook-config-server.herokuapp.com/
+  cloud:    config:      uri:      - ${CONFIG-SERVER-URL}
