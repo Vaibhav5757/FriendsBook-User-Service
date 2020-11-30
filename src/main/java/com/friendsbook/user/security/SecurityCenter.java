@@ -15,9 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityCenter extends WebSecurityConfigurerAdapter{
 	
-	@Value("${SECURITY-USER-NAME}")
+	@Value("${spring.security.user.name}")
 	private String basicSecurityUser;
-	@Value("${SECURITY-USER-PASSWORD}")
+	@Value("${spring.security.user.password}")
 	private String basicSecurityPassword;
 	
 	// Currently I'm using basic auth as it's the easiest one to implement.

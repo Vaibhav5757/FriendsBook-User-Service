@@ -18,21 +18,24 @@ public class GlobalExceptionHandler {
 	// For more info, you can refer this article - https://www.baeldung.com/spring-boot-bean-validation
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public Map<String, String> handleValidationExceptions(
-	  MethodArgumentNotValidException ex) {
+	public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
 	    Map<String, String> errors = new HashMap<>();
 	    ex.getBindingResult().getAllErrors().forEach((error) -> {
 	        String fieldName = ((FieldError) error).getField();
 	        String errorMessage = error.getDefaultMessage();
 	        errors.put(fieldName, errorMessage);
 	    });
-	    return errors;
+	    StringBuilder sb = new StringBuilder();
+	    errors.forEach((key, value) -> {
+	    	sb.append(key + " " + value + ". ");
+	    });
+
+	    return new ResponseEntity<String>(sb.toString(), HttpStatus.BAD_REQUEST);
 	}
 
 	// Exception Handling for exception occuring due to wrong api calls or to send api responses when
 	@ExceptionHandler(ApiException.class)
-	public ResponseEntity<ApiResponse> handleEmailAlreadyInUse(ApiException ex){
-		ApiResponse obj = new ApiResponse(ex.getMsg());
-		return new ResponseEntity<ApiResponse>(obj, HttpStatus.BAD_REQUEST);
+	public ResponseEntity<String> handleEmailAlreadyInUse(ApiException ex){
+		return new ResponseEntity<String>(ex.getMsg(), HttpStatus.BAD_REQUEST);
 	}
 }

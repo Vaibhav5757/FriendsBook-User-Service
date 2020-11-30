@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.friendsbook.user.model.User;
 import com.friendsbook.user.repository.UsersRepository;
-import com.friendsbook.user.util.ApiResponse;
 import com.friendsbook.user.util.ApiException;
 
 @Service
@@ -27,7 +26,7 @@ public class UserService {
 	private Logger logger = LoggerFactory.getLogger(UserService.class);
 	
 	// add a new User to database
-	public ResponseEntity<ApiResponse> createUser(User obj) throws ApiException{
+	public ResponseEntity<String> createUser(User obj) throws ApiException{
 		
 		// check if email is already in use or not
 		User target = this.usrRepo.findByEmail(obj.getEmail());
@@ -47,8 +46,7 @@ public class UserService {
 		// save the user
 		try {
 			this.usrRepo.save(obj);
-			ApiResponse response = new ApiResponse("User Created Successfully");
-			return new ResponseEntity<ApiResponse>(response, HttpStatus.OK);
+			return new ResponseEntity<String>("User Created Successfully", HttpStatus.OK);
 		}catch(Exception err) {
 			logger.error(err.getMessage());
 		}

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.friendsbook.user.model.User;
 import com.friendsbook.user.service.UserService;
 import com.friendsbook.user.util.ApiException;
-import com.friendsbook.user.util.ApiResponse;
 
 @RestController
 @RequestMapping("/user")
@@ -22,7 +21,7 @@ public class UserController {
 	private UserService usrSvc;
 	
 	@PostMapping("/sign-up")
-	public ResponseEntity<ApiResponse> addUser(@Valid @RequestBody User obj) throws ApiException{
+	public ResponseEntity<String> addUser(@Valid @RequestBody User obj) throws ApiException{
 		return this.usrSvc.createUser(obj);
 	}
 }
