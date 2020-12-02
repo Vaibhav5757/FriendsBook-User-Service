@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.friendsbook.user.model.User;
 import com.friendsbook.user.service.UserService;
 import com.friendsbook.user.util.ApiException;
+import com.friendsbook.user.util.LoginBody;
 
 @RestController
 @RequestMapping("/user")
@@ -23,5 +24,10 @@ public class UserController {
 	@PostMapping("/sign-up")
 	public ResponseEntity<String> addUser(@Valid @RequestBody User obj) throws ApiException{
 		return this.usrSvc.createUser(obj);
+	}
+	
+	@PostMapping("/log-in")
+	public ResponseEntity<User> login(@Valid @RequestBody LoginBody obj) throws ApiException{
+		return this.usrSvc.login(obj);
 	}
 }

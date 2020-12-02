@@ -7,12 +7,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.friendsbook.user.model.User;
 import com.friendsbook.user.repository.UsersRepository;
 import com.friendsbook.user.util.ApiException;
+import com.friendsbook.user.util.LoginBody;
 
 @Service
 public class UserService {
@@ -51,6 +53,18 @@ public class UserService {
 			logger.error(err.getMessage());
 		}
 		return null;
+	}
+	
+	public ResponseEntity<User> login(LoginBody obj) throws ApiException{
+		User target = this.usrRepo.findByEmail(obj.getEmail());
+		// check if user exists with this email address or not
+		if(target == null)
+			throw new ApiException("No Account exists with the email " + obj.getEmail());
+		// check if password is correct or not
+		if(new BCryptPasswordEncoder().matches(obj.getPassword(), target.getPassword()))
+			return new ResponseEntity<User>(target, HttpStatus.OK);
+		else
+			throw new ApiException("Incorrect password for email " + obj.getEmail());// throw error if password mismatch
 	}
 
 }
