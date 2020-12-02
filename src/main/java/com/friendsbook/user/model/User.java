@@ -39,6 +39,8 @@ public class User {
 	
 	private Date joined, lastPasswordUpdated;
 	
+	private boolean isAccountLocked;
+	
 	public void addRoles(String role) {
 		this.roles.add(role);
 	}
