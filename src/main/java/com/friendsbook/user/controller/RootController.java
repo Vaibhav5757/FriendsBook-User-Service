@@ -13,7 +13,8 @@ public class RootController {
 	private Logger logger = LoggerFactory.getLogger(RootController.class);
 
 	@GetMapping("/")
-	public void wakeUp() {
+	public String wakeUp() {
 		logger.info("Wake up call recieved!!!");
+		return "Yo, I Woke up!!!";
 	}
 }
