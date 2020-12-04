@@ -49,7 +49,7 @@ public class SecurityCenter extends WebSecurityConfigurerAdapter{
 	public void configure(WebSecurity web) throws Exception {
 		web
 			.ignoring()
-			.antMatchers("/wake-up**");
+			.antMatchers("/wake-up/**");
 	}
 	
 	@Bean
