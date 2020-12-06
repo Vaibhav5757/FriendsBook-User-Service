@@ -32,6 +32,7 @@ public class SecurityCenter extends WebSecurityConfigurerAdapter{
 			.httpBasic()
 			.and()
 			.authorizeRequests()
+			.antMatchers("/wake-up").permitAll()
 			.anyRequest()
 			.authenticated();
 	}
