@@ -32,7 +32,7 @@ public class SecurityCenter extends WebSecurityConfigurerAdapter{
 			.httpBasic()
 			.and()
 			.authorizeRequests()
-			.antMatchers("/wake-up").permitAll()
+			.antMatchers("/wake-up/**").permitAll()
 			.anyRequest()
 			.authenticated();
 	}
@@ -49,7 +49,7 @@ public class SecurityCenter extends WebSecurityConfigurerAdapter{
 	public void configure(WebSecurity web) throws Exception {
 		web
 			.ignoring()
-			.antMatchers("/wkae-up");
+			.antMatchers("/wake-up/**");
 	}
 	
 	@Bean
