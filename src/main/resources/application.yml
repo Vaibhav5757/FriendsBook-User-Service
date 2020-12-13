@@ -7,3 +7,6 @@ spring:
     username: ${DATABASE-USERNAME}
     password: ${DATABASE-USER-PASSWORD}
     driver-class-name: ${DRIVER-CLASS-NAME}
+eureka:
+  instance:
+    hostname: ${DOMAIN_NAME}
