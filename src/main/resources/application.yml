@@ -9,4 +9,4 @@ spring:
     driver-class-name: ${DRIVER-CLASS-NAME}
 eureka:
   instance:
-    hostname: ${spring.application.name}.herokuapp.com
+    hostname: ${APP_NAME}.herokuapp.com

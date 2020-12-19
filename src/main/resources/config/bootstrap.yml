@@ -1,1 +1,1 @@
-spring:  application:    name: User-Microservice  cloud:    config:      uri:      - ${CONFIG-SERVER-URL}
+spring:  application:    name: ${APP_NAME}  cloud:    config:      uri:      - ${CONFIG-SERVER-URL}
