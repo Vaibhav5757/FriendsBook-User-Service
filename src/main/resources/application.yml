@@ -10,4 +10,4 @@ spring:
 eureka:
   instance:
     non-secure-port: 80
-    hostname: <appname>.herokuapp.com
+    hostname: ${APP_NAME}.herokuapp.com
