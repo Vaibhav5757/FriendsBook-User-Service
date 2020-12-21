@@ -9,4 +9,5 @@ spring:
     driver-class-name: ${DRIVER-CLASS-NAME}
 eureka:
   instance:
+    non-secure-port: 80
     hostname: <appname>.herokuapp.com
