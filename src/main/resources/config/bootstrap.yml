@@ -1,1 +1,1 @@
-spring:  application:    name: ${APP_NAME}  cloud:    config:      uri:      - ${CONFIG-SERVER-URL}
+spring:  application:    name: ${APP_NAME:User-Service}  cloud:    config:      uri:      - ${CONFIG-SERVER-URL:http://localhost:8500}

@@ -1,12 +1,12 @@
 spring:
   security:
     user:
-      name: ${SECURITY-USER-NAME}
-      password: ${SECURITY-USER-PASSWORD}
-  datasource:    url: ${DATABASE-URL}
-    username: ${DATABASE-USERNAME}
-    password: ${DATABASE-USER-PASSWORD}
-    driver-class-name: ${DRIVER-CLASS-NAME}
+      name: ${SECURITY-USER-NAME:user}
+      password: ${SECURITY-USER-PASSWORD:password}
+  datasource:    url: ${DATABASE-URL:jdbc:postgresql://localhost:5432/friends_book}
+    username: ${DATABASE-USERNAME:postgre}
+    password: ${DATABASE-USER-PASSWORD:password}
+    driver-class-name: ${DRIVER-CLASS-NAME:org.postgresql.Driver}
 eureka:
   instance:
-    hostname: ${DOMAIN_NAME}
+    hostname: ${DOMAIN_NAME:localhost}
