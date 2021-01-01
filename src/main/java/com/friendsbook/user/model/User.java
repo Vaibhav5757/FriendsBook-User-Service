@@ -44,4 +44,11 @@ public class User {
 	public void addRoles(String role) {
 		this.roles.add(role);
 	}
+
+	public User(@NotBlank String name, @NotBlank String password, @NotBlank @Email String email) {
+		super();
+		this.name = name;
+		this.password = password;
+		this.email = email;
+	}
 }
