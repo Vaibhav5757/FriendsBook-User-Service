@@ -27,6 +27,9 @@ public class AdminService {
 		// check if user exists with this email address or not
 		if(target == null)
 			throw new ApiException("No Account exists with the email " + obj.getEmail());
+		// Safe check whether user is admin or not
+		if(target.getRoles().contains("ROLE_ADMIN"))
+			throw new ApiException("User " + obj.getEmail()+" is already an admin");
 		
 		// Add admin Role
 		target.addRoles("ROLE_ADMIN");
