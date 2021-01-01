@@ -15,6 +15,7 @@ import com.friendsbook.user.model.User;
 import com.friendsbook.user.repository.UsersRepository;
 import com.friendsbook.user.util.ApiException;
 import com.friendsbook.user.util.LoginBody;
+import com.friendsbook.user.util.PasswordChangeBody;
 
 @Service
 public class UserService {
@@ -65,6 +66,28 @@ public class UserService {
 			return new ResponseEntity<User>(target, HttpStatus.OK);
 		else
 			throw new ApiException("Incorrect password for email " + obj.getEmail());// throw error if password mismatch
+	}
+	
+	public ResponseEntity<String> updatePassword(PasswordChangeBody obj) throws ApiException{
+		User target = this.usrRepo.findByEmail(obj.getEmail());
+		// check if user exists with this email address or not
+		if(target == null)
+			throw new ApiException("No Account exists with the email " + obj.getEmail());
+		
+		// Hash the new password
+		target.setPassword(this.encoder.encode(obj.getPassword()));
+		// update the last password changed updated date
+		target.setLastPasswordUpdated(new Date());
+		
+		// save the details to database
+		try {
+			this.usrRepo.save(target);
+			return new ResponseEntity<String>("Password Changed Successfully", HttpStatus.OK);
+		}catch(Exception err) {
+			logger.error(err.getMessage());
+		}
+		return null;
+		
 	}
 
 }
