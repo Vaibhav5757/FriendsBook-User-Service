@@ -2,10 +2,12 @@ package com.friendsbook.user.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import com.friendsbook.user.model.User;
 import com.friendsbook.user.service.UserService;
 
+@Component
 public class ApplicationInitializer implements CommandLineRunner {
 	
 	@Autowired
