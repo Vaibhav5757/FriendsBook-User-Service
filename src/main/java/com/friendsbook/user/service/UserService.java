@@ -58,14 +58,15 @@ public class UserService {
 	
 	public ResponseEntity<User> login(LoginBody obj) throws ApiException{
 		User target = this.usrRepo.findByEmail(obj.getEmail());
+		
 		// check if user exists with this email address or not
 		if(target == null)
 			throw new ApiException("No Account exists with the email " + obj.getEmail());
+		
 		// check if password is correct or not
-		if(new BCryptPasswordEncoder().matches(obj.getPassword(), target.getPassword()))
+		if(new BCryptPasswordEncoder().matches(obj.getPassword(), target.getPassword())) 
 			return new ResponseEntity<User>(target, HttpStatus.OK);
-		else
-			throw new ApiException("Incorrect password for email " + obj.getEmail());// throw error if password mismatch
+		else throw new ApiException("Incorrect password for email " + obj.getEmail());// throw error if password mismatch
 	}
 	
 	public ResponseEntity<String> updatePassword(PasswordChangeBody obj) throws ApiException{
