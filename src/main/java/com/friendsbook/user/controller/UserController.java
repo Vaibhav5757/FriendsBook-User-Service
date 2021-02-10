@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.friendsbook.user.model.User;
 import com.friendsbook.user.service.UserService;
 import com.friendsbook.user.util.ApiException;
+import com.friendsbook.user.util.FollowRequestBody;
 import com.friendsbook.user.util.LoginBody;
 import com.friendsbook.user.util.PasswordChangeBody;
 
@@ -36,5 +37,10 @@ public class UserController {
 	@PutMapping("/change-password")
 	public ResponseEntity<String> updatePassword(@Valid @RequestBody PasswordChangeBody obj)throws ApiException {
 		return this.usrSvc.updatePassword(obj);
+	}
+
+	@PostMapping("/follow")
+	public ResponseEntity<String> follow(@Valid @RequestBody FollowRequestBody obj)throws ApiException {
+		return this.usrSvc.follow(obj);
 	}
 }

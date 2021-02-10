@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.friendsbook.user.model.User;
 import com.friendsbook.user.repository.UsersRepository;
 import com.friendsbook.user.util.ApiException;
+import com.friendsbook.user.util.FollowRequestBody;
 import com.friendsbook.user.util.LoginBody;
 import com.friendsbook.user.util.PasswordChangeBody;
 
@@ -91,4 +92,29 @@ public class UserService {
 		
 	}
 
+	public ResponseEntity<String> follow(FollowRequestBody obj) throws ApiException{
+		
+		User target = this.usrRepo.findByEmail(obj.getTarget());
+		// check if user exists with this email address or not
+		if(target == null)
+			throw new ApiException("No Account exists with the email " + obj.getTarget());
+		
+		User self = this.usrRepo.findByEmail(obj.getEmail());
+		if(self.getFollowing().contains(target.getEmail())){
+			return new ResponseEntity<String>("You are already following " + obj.getTarget(), HttpStatus.BAD_REQUEST);
+		}
+
+		self.getFollowing().add(obj.getTarget());// Add to following list
+		
+		target.getFollowers().add(obj.getEmail());// Followers of the target user
+		
+		try {
+			this.usrRepo.save(self);
+			this.usrRepo.save(target);
+			return new ResponseEntity<String>(obj.getEmail() + " is now following " + obj.getTarget(), HttpStatus.OK);
+		}catch(Exception err) {
+			logger.error(err.getMessage());
+		}
+		return null;
+	}
 }
